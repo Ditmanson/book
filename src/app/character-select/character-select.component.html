@@ -1,0 +1,75 @@
+<form (submit)="showCard = true">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      name="title"
+      [(ngModel)]="cardTitle"
+    />
+  </div>
+  <div class="form-group">
+    <label for="character">Select a character</label>
+    <select
+      class="form-control"
+      id="character"
+      name="character"
+      [(ngModel)]="selectedCharacter"
+    >
+      <option *ngFor="let character of characters" [ngValue]="character">
+        {{ character.name }}
+      </option>
+    </select>
+    <label for="background">Select a background</label>
+    <select
+      class="form-control"
+      id="background"
+      name="background"
+      [(ngModel)]="selectedBackground"
+    >
+      <option *ngFor="let background of backgrounds" [ngValue]="background">
+        {{ background.name }}
+      </option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Select</button>
+</form>
+<div
+  *ngIf="showCard"
+  class="card"
+  style="position: relative; width: 500px; height: 300px; overflow: hidden"
+>
+  <div
+    class="card-title"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 20px;
+    "
+  >
+    {{ cardTitle }}
+  </div>
+  <img
+    [src]="selectedBackground.image"
+    [alt]="selectedBackground.name"
+    style="width: 100%; height: 100%"
+  />
+  <img
+    [src]="selectedCharacter.image"
+    [alt]="selectedCharacter.name"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+    "
+  />
+</div>
